@@ -5,6 +5,12 @@ services:
     plan: free
     dockerfilePath: Dockerfile.backend
     autoDeploy: true
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          name: todo-redis
+          type: redis
+          property: connectionString
 
   - type: web
     name: todo-frontend
@@ -12,3 +18,7 @@ services:
     plan: free
     dockerfilePath: Dockerfile.frontend
     autoDeploy: true
+
+  - type: redis
+    name: todo-redis
+    plan: free
