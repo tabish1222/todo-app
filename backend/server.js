@@ -8,6 +8,7 @@ const port = 3000;
 
 app.use(bodyParser.json());
 
+// PostgreSQL connection
 const db = new Pool({
   user: process.env.PGUSER,
   host: process.env.PGHOST,
@@ -16,11 +17,21 @@ const db = new Pool({
   port: process.env.PGPORT,
 });
 
+// Redis connection
 const redisClient = redis.createClient({
   url: process.env.REDIS_URL,
 });
-redisClient.connect();
 
+(async () => {
+  try {
+    await redisClient.connect();
+    logger.info('Connected to Redis');
+  } catch (err) {
+    logger.error('Redis connection failed:', err);
+  }
+})();
+
+// Get all todos
 app.get('/todos', async (req, res) => {
   const cacheKey = 'todos:all';
   const cacheData = await redisClient.get(cacheKey);
@@ -35,6 +46,7 @@ app.get('/todos', async (req, res) => {
   res.json(result.rows);
 });
 
+// Add new todo
 app.post('/todos', async (req, res) => {
   const { task } = req.body;
   logger.info(`Adding new todo: "${task}"`);
