@@ -10,7 +10,16 @@ services:
         fromService:
           name: todo-redis
           type: redis
-          property: connectionString
+      - key: PGUSER
+        value: your_pg_user
+      - key: PGHOST
+        value: your_pg_host
+      - key: PGPASSWORD
+        value: your_pg_password
+      - key: PGDATABASE
+        value: your_pg_database
+      - key: PGPORT
+        value: "5432"
 
   - type: web
     name: todo-frontend
