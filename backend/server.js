@@ -18,16 +18,20 @@ const db = new Pool({
 });
 
 // Redis connection
+const redisUrl = process.env.REDIS_URL;
 const redisClient = redis.createClient({
-  url: process.env.REDIS_URL,
+  url: redisUrl,
 });
 
 (async () => {
   try {
+    if (!redisUrl) {
+      throw new Error('REDIS_URL is not set');
+    }
     await redisClient.connect();
     logger.info('Connected to Redis');
   } catch (err) {
-    logger.error('Redis connection failed:', err);
+    logger.error(`Redis connection failed: ${err.message}`);
   }
 })();
 
