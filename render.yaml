@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: todo-backend
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile.backend
+    buildCommand: ""
+    startCommand: ""
+    autoDeploy: true
+    ports:
+      - 3000
+
+  - type: static
+    name: todo-frontend
+    env: static
+    buildCommand: ""
+    staticPublishPath: frontend
