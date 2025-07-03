@@ -15,7 +15,7 @@ services:
       - key: PGPASSWORD
         value: LuJvlsgrQd1lN0x0um1C1a4Ugsl4dczK
       - key: PGHOST
-        value: dpg-d1jbghqli9vc739lsnc0-a
+        value: dpg-d1jbghqli9vc739lsnc0-a.oregon-postgres.render.com
       - key: PGDATABASE
         value: todo_db_y01n
       - key: PGPORT
