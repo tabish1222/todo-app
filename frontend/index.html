@@ -11,8 +11,10 @@
   <button onclick="addTodo()">Add</button>
 
   <script>
+    const BACKEND_URL = 'https://todo-backend-5168.onrender.com';
+
     async function fetchTodos() {
-      const res = await fetch('http://localhost:3000/todos');
+      const res = await fetch(`${BACKEND_URL}/todos`);
       const todos = await res.json();
       document.getElementById('todo-list').innerHTML = 
         todos.map(todo => `<li>${todo.task}</li>`).join('');
@@ -20,11 +22,12 @@
 
     async function addTodo() {
       const task = document.getElementById('todo-input').value;
-      await fetch('http://localhost:3000/todos', {
+      await fetch(`${BACKEND_URL}/todos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ task })
       });
+      document.getElementById('todo-input').value = '';
       fetchTodos();
     }
 
