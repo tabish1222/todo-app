@@ -11,13 +11,13 @@ services:
           name: todo-redis
           type: redis
       - key: PGUSER
-        value: your_pg_user
-      - key: PGHOST
-        value: your_pg_host
+        value: todo_db_y01n_user
       - key: PGPASSWORD
-        value: your_pg_password
+        value: LuJvlsgrQd1lN0x0um1C1a4Ugsl4dczK
+      - key: PGHOST
+        value: dpg-d1jbghqli9vc739lsnc0-a
       - key: PGDATABASE
-        value: your_pg_database
+        value: todo_db_y01n
       - key: PGPORT
         value: "5432"
 
