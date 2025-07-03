@@ -22,7 +22,7 @@ const db = new Pool({
   password: process.env.PGPASSWORD,
   port: process.env.PGPORT,
 });
-
+console.log('PGHOST:', process.env.PGHOST);
 // Redis connection
 const redisUrl = process.env.REDIS_URL;
 const redisClient = redis.createClient({ url: redisUrl });
