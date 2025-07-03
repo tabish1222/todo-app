@@ -1,10 +1,16 @@
 const express = require('express');
+const cors = require('cors'); // ← ADD THIS
 const { Pool } = require('pg');
 const redis = require('redis');
 const bodyParser = require('body-parser');
 const logger = require('./logger');
 const app = express();
 const port = 3000;
+
+// Enable CORS for your frontend Render URL
+app.use(cors({
+  origin: 'https://todo-frontend-x9he.onrender.com', // ← your frontend URL
+}));
 
 app.use(bodyParser.json());
 
@@ -19,15 +25,11 @@ const db = new Pool({
 
 // Redis connection
 const redisUrl = process.env.REDIS_URL;
-const redisClient = redis.createClient({
-  url: redisUrl,
-});
+const redisClient = redis.createClient({ url: redisUrl });
 
 (async () => {
   try {
-    if (!redisUrl) {
-      throw new Error('REDIS_URL is not set');
-    }
+    if (!redisUrl) throw new Error('REDIS_URL is not set');
     await redisClient.connect();
     logger.info('Connected to Redis');
   } catch (err) {
@@ -60,5 +62,5 @@ app.post('/todos', async (req, res) => {
 });
 
 app.listen(port, () => {
-  logger.info(`Server running at http://localhost:${port}`);
+  logger.info(`Server running at http://localhost:${port} or on Render`);
 });
