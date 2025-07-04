@@ -15,12 +15,12 @@ app.use(cors({
 app.use(bodyParser.json());
 
 // PostgreSQL connection
-const db = new Pool({
-  user: process.env.PGUSER,
+const pool = new Pool({
   host: process.env.PGHOST,
-  database: process.env.PGDATABASE,
+  port: process.env.PGPORT || 5432,
+  user: process.env.PGUSER,
   password: process.env.PGPASSWORD,
-  port: process.env.PGPORT,
+  database: process.env.PGDATABASE,
 });
 console.log('PGHOST:', process.env.PGHOST);
 // Redis connection
