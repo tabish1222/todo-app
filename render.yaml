@@ -11,7 +11,7 @@ services:
           name: todo-redis
           type: redis
       - key: PGUSER
-        value: todo_db_y01n_user
+        value: postgres
       - key: PGPASSWORD
         value: LuJvlsgrQd1lN0x0um1C1a4Ugsl4dczK
       - key: PGHOST
